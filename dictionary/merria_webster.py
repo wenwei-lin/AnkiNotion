@@ -47,5 +47,5 @@ class MerriamWebster:
         soundmark = sound_data['mw']
         audio = sound_data['sound']['audio']
         audio_url = MerriamWebster.get_pronunciation_media_url(audio)
-        return {'soundmark': soundmark, 'audio_url': audio_url, 'audio_filename': f'{audio}.mp3'}
+        return {'soundmark': soundmark, 'audio_url': audio_url}
 

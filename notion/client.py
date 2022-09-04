@@ -1,12 +1,12 @@
 import requests
 import json
 
-from property import PagePropertyParser
+from notion.property import PagePropertyParser
 
 
 class NotionClient:
-    def __init__(self, key) -> None:
-        self.key = key
+    def __init__(self, token_v2) -> None:
+        self.key = token_v2
         self.headers = {
             "Accept": "application/json",
             "Notion-Version": "2022-06-28",
