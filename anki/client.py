@@ -46,7 +46,7 @@ class AnkiClient:
         result = self.invoke("notesInfo", notes=[note_id])
         return result
     
-    def create_note(self, deck_name, note_type, fields, tags=None, audio=None, video=None, picture=None):
+    def create_note(self, deck_name, modal_name, fields, tags=None, audio=None, video=None, picture=None):
         """Create a new note.
         Media files should be a list of media file paths, base64 data, or url, for example:
          "audio": [{
@@ -58,7 +58,7 @@ class AnkiClient:
                 ]
             }],
         """
-        self.invoke("addNote", note={"deckName": deck_name, "modelName": note_type, "fields": fields, "options": {"allowDuplicate": False}, "tags": tags, "audio": audio, "video": video, "picture": picture})
+        self.invoke("addNote", note={"deckName": deck_name, "modelName": modal_name, "fields": fields, "options": {"allowDuplicate": False}, "tags": tags, "audio": audio, "video": video, "picture": picture})
     
     def update_note(self, note_id, fields, audio=None, video=None, picture=None):
         """Update a note."""

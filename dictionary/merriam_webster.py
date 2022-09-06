@@ -8,7 +8,7 @@ class MerriamWebster:
     def __init__(self, api_key) -> None:
         self.api_key = api_key
     
-    def get_pronunciation_media_url(audio):
+    def __get_pronunciation_media_url(audio):
         language_code = 'en'
         country_code = 'us'
         format = 'mp3'
@@ -34,18 +34,23 @@ class MerriamWebster:
         return response
 
     def get_pronunciation(self, word):
+        """Get the pronunciation of the word
+        Return soundmark and audio url
+        """
         data = self.request_word_info(word)
         if len(data) == 0:
-            return None
+            return None, None
         
+        if 'meta' not in data[0] or word.lower() != data[0]['meta']['id'].lower():
+            return None, None
+
         data = data[0]
         
         if 'hwi' not in data or 'prs' not in data['hwi']:
-            return None
+            return None, None
 
         sound_data = data['hwi']['prs'][0]
         soundmark = sound_data['mw']
         audio = sound_data['sound']['audio']
-        audio_url = MerriamWebster.get_pronunciation_media_url(audio)
-        return {'soundmark': soundmark, 'audio_url': audio_url}
-
+        audio_url = MerriamWebster.__get_pronunciation_media_url(audio)
+        return soundmark, audio_url

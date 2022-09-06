@@ -45,3 +45,10 @@ class NotionClient:
         """Get the page properties"""
         property_parser = PagePropertyParser()
         return property_parser.parse_properties(page["properties"])
+
+    def update_page_properties(self, page_id, properties):
+        """Update the page properties"""
+        endpoint = f"https://api.notion.com/v1/pages/{page_id}"
+        payload = {"properties": properties}
+        response = requests.patch(endpoint, headers=self.headers, json=payload).json()
+        return response
